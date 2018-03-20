@@ -1,0 +1,22 @@
+﻿<Window x:Class="PostIt.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:p = "clr-namespace:PostIt.Properties"
+        xmlns:local="clr-namespace:PostIt.Views"
+        xmlns:vm ="clr-namespace:PostIt.ViewModels"
+        mc:Ignorable="d"
+        Title="{x:Static p:Resources.MainWindow}" Height="350" Width="525"
+        DataContext="{DynamicResource ViewModelMainWindow}">
+    <Window.Resources>
+        <vm:ViewModelMainWindow x:Key="ViewModelMainWindow"/>
+    </Window.Resources>
+    <Grid>
+        <StackPanel Orientation="Vertical">
+        <Label Content="{Binding TestString}" />
+            <TextBox x:Name="tb1" Text="{Binding TestString}" Margin="5"/>
+            <Button Content="Update tekst" Command="{Binding UpdateTekstCommand}" CommandParameter="{Binding Text, ElementName=tb1}" Margin="5"/>
+        </StackPanel>
+    </Grid>
+</Window>
