@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:p = "clr-namespace:PostIt.Properties"
         xmlns:local="clr-namespace:PostIt.Views"
+        xmlns:uc="clr-namespace:PostIt.Views.UserControls"
         xmlns:vm ="clr-namespace:PostIt.ViewModels"
         mc:Ignorable="d"
         Title="{x:Static p:Resources.MainWindow}" Height="350" Width="525"
@@ -17,6 +18,7 @@
         <Label Content="{Binding TestString}" />
             <TextBox x:Name="tb1" Text="{Binding TestString}" Margin="5"/>
             <Button Content="Update tekst" Command="{Binding UpdateTekstCommand}" CommandParameter="{Binding Text, ElementName=tb1}" Margin="5"/>
-        </StackPanel>
+            <uc:PostItControl x:Name="Test"></uc:PostItControl>
+            </StackPanel>
     </Grid>
 </Window>

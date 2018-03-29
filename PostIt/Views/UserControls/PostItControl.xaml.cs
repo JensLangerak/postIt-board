@@ -12,26 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PostIt.ViewModels.UserControls;
 
-namespace PostIt.Views
+namespace PostIt.Views.UserControls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for PostItControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class PostItControl : UserControl
     {
-        public MainWindow()
+        public PostItControl()
         {
             InitializeComponent();
-            ViewModelPostIt t = new ViewModelPostIt();
-            Models.PostIt p = new Models.PostIt();
-            p.Color = Colors.Aqua;
-            t.Model = p;
-            Test.DataContext = t;
-            p.Text = "Hello World!";
-            Test.UpdateLayout();
-
         }
     }
 }
