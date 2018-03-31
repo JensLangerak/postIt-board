@@ -6,7 +6,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PostIt.Models
+namespace PostItProject.Models
 {
     public abstract class ModelBase : INotifyPropertyChanged
     {

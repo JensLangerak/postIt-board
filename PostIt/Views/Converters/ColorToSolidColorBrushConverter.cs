@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows.Data;
 using System.Windows.Media;
 
-namespace PostIt.Views.Converters
+namespace PostItProject.Views.Converters
 {
     public class ColorToSolidColorBrushConverter : IValueConverter
     {

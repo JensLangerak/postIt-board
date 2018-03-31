@@ -1,0 +1,7 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:PostItProject.Views.Recources">
+    <ControlTemplate x:Key="MovableControlTemplate" TargetType="ContentControl">
+        <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+    </ControlTemplate>
+</ResourceDictionary>

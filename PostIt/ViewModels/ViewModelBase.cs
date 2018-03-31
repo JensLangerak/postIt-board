@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace PostIt.ViewModels
+namespace PostItProject.ViewModels
 {
     /// <summary>
     /// Taken from https://stackoverflow.com/questions/36149863/how-to-write-viewmodelbase-in-mvvm-wpf

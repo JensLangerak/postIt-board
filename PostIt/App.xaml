@@ -1,7 +1,7 @@
-﻿<Application x:Class="PostIt.App"
+﻿<Application x:Class="PostItProject.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:PostIt"
+             xmlns:local="clr-namespace:PostItProject"
              StartupUri="Views\MainWindow.xaml">
     <Application.Resources>
          

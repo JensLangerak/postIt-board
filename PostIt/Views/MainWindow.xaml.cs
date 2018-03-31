@@ -12,9 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using PostIt.ViewModels.UserControls;
+using PostItProject.Models;
+using PostItProject.ViewModels;
+using PostItProject.ViewModels.UserControls;
 
-namespace PostIt.Views
+namespace PostItProject.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,13 +26,13 @@ namespace PostIt.Views
         public MainWindow()
         {
             InitializeComponent();
-            ViewModelPostIt t = new ViewModelPostIt();
-            Models.PostIt p = new Models.PostIt();
-            p.Color = Colors.Aqua;
-            t.Model = p;
-            Test.DataContext = t;
-            p.Text = "Hello World!";
-            Test.UpdateLayout();
+
+            this.UpdateLayout();
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            ((ViewModelMainWindow) DataContext).AddItem();
 
         }
     }

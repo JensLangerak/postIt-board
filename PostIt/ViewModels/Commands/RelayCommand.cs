@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Windows.Input;
 
-namespace PostIt.ViewModels.Commands
+namespace PostItProject.ViewModels.Commands
 {
     /// <summary>
     /// Taken from http://msdn.microsoft.com/en-us/magazine/dd419663.aspx#id0090030

@@ -1,74 +1,81 @@
-﻿<UserControl x:Class="PostIt.Views.UserControls.PostItControl"
+﻿<UserControl x:Class="PostItProject.Views.UserControls.PostItControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:PostIt.Views.UserControls"
+             xmlns:local="clr-namespace:PostItProject.Views.UserControls"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             xmlns:vm="clr-namespace:PostIt.ViewModels.UserControls"
-             xmlns:v="clr-namespace:PostIt.Views"
-             xmlns:converters="clr-namespace:PostIt.Views.Converters"
+             xmlns:vm="clr-namespace:PostItProject.ViewModels.UserControls"
+             xmlns:v="clr-namespace:PostItProject.Views"
+             xmlns:converters="clr-namespace:PostItProject.Views.Converters"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200"
             >
     <UserControl.DataContext>
         <vm:ViewModelPostIt />
     </UserControl.DataContext>
-    <UserControl.Resources>
-        <converters:ColorToSolidColorBrushConverter  x:Key="ColorToSolidColorBrushValueConverter"/>
+    <UserControl.Resources >
 
-        <!--Scrollbar source: https://stackoverflow.com/questions/10969292/apple-style-scrollbar-wpf -->
-        <!--Scrollbar Thumbs-->
-        <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">6</sys:Double>
-        <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Thumb}">
-                        <Grid x:Name="Grid">
-                            <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
-                            <Border x:Name="Rectangle1" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+    <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Recources/Templates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
-        <!--ScrollBars-->
-        <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
-            <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
-            <Setter Property="Foreground" Value="#7C7C7C" />
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="Width" Value="6" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ScrollBar}">
-                        <Grid x:Name="GridRoot" Width="6" Background="{TemplateBinding Background}">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="0.00001*" />
-                            </Grid.RowDefinitions>
+            <converters:ColorToSolidColorBrushConverter  x:Key="ColorToSolidColorBrushValueConverter"/>
 
-                            <Track Grid.Row="0" IsDirectionReversed="true" Focusable="false">
-                                <Track.Thumb>
-                                    <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
-                                </Track.Thumb>
-                            </Track>
-                        </Grid>
+            <!--Scrollbar source: https://stackoverflow.com/questions/10969292/apple-style-scrollbar-wpf -->
+            <!--Scrollbar Thumbs-->
+            <sys:Double x:Key="{x:Static SystemParameters.VerticalScrollBarWidthKey}">6</sys:Double>
+            <Style x:Key="ScrollThumbs" TargetType="{x:Type Thumb}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Thumb}">
+                            <Grid x:Name="Grid">
+                                <Rectangle HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto" Fill="Transparent" />
+                                <Border x:Name="Rectangle1" CornerRadius="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="Auto" Height="Auto"  Background="{TemplateBinding Background}" />
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
 
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsEnabled" Value="false">
-                                <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+            <!--ScrollBars-->
+            <Style x:Key="{x:Type ScrollBar}" TargetType="{x:Type ScrollBar}">
+                <Setter Property="Stylus.IsFlicksEnabled" Value="false" />
+                <Setter Property="Foreground" Value="#7C7C7C" />
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="Width" Value="6" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type ScrollBar}">
+                            <Grid x:Name="GridRoot" Width="6" Background="{TemplateBinding Background}">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="0.00001*" />
+                                </Grid.RowDefinitions>
 
+                                <Track Grid.Row="0" IsDirectionReversed="true" Focusable="false">
+                                    <Track.Thumb>
+                                        <Thumb x:Name="Thumb" Background="{TemplateBinding Foreground}" Style="{DynamicResource ScrollThumbs}" />
+                                    </Track.Thumb>
+                                </Track>
+                            </Grid>
+
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsEnabled" Value="false">
+                                    <Setter TargetName="Thumb" Property="Visibility" Value="Collapsed" />
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
     </UserControl.Resources>
-    <Border Height="200" Width="200" BorderBrush="#999999" BorderThickness="4" Margin="8" Background="{Binding Model.Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}">
+    
+    <Border BorderBrush="#999999" BorderThickness="4" Margin="8" Background="{Binding Model.Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch"  >
-
             <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap"  AcceptsReturn="True" AcceptsTab="True" Text="{Binding Model.Text, Mode=TwoWay}"></TextBox>
         </ScrollViewer>
     </Border>

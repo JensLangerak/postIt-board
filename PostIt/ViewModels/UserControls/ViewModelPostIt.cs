@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using PostItProject.Models;
 
-namespace PostIt.ViewModels.UserControls
+namespace PostItProject.ViewModels.UserControls
 {
     public class ViewModelPostIt : ViewModelBase
     {
-        private Models.PostIt _model;
+        private PostIt _model;
 
-        public Models.PostIt Model
+        public PostIt Model
         {
             get => _model;
             set => SetProperty(ref _model, value);
