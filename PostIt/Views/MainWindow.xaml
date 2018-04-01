@@ -18,8 +18,6 @@
                 <ResourceDictionary Source="Recources/Templates.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelMainWindow x:Key="ViewModelMainWindow"/>
-
-           
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
@@ -43,18 +41,19 @@
                                 Value= "{Binding Model.PosX, Mode=TwoWay}"/>
                         <Setter Property="Canvas.Top"
                                 Value= "{Binding Model.PosY, Mode=TwoWay}"/>
-
+                        <Setter Property="Height"
+                                Value= "{Binding Model.Height, Mode=TwoWay}"/>
+                        <Setter Property="Width"
+                                Value= "{Binding Model.Width, Mode=TwoWay}"/>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl Name="DesignerItem"
+                        <ContentControl Name="PostItControl"
                                         Template="{StaticResource MovableControlTemplate}"
-                                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}">
-                            <uc:PostItControl x:Name="Test" DataContext="{Binding DataContext}"
-                                              d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"
-                                              Width ="{Binding Model.Width, Mode=TwoWay}"
-                                              Height="{Binding Model.Height, Mode=TwoWay}" />
+                                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}">
+                            <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
+                                              d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
                         </ContentControl>
 
                     </DataTemplate>

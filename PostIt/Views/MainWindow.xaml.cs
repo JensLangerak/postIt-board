@@ -42,7 +42,7 @@ namespace PostItProject.Views
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             ((ViewModelMainWindow) DataContext).AddItem();
-            this.UpdateLayout();
+           
         }
     }
 }

@@ -22,6 +22,8 @@ namespace PostItProject.Views.CustomControls
             if (!(this.DataContext is UIElement item)) return;
             Canvas.SetLeft(item, Canvas.GetLeft(item) + e.HorizontalChange);
             Canvas.SetTop(item, Canvas.GetTop(item) + e.VerticalChange);
+
+            e.Handled = true;
         }
     }
 }

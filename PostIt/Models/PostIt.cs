@@ -11,8 +11,8 @@ namespace PostItProject.Models
     {
         private string _text;
         private Color _color;
-        private int _height;
-        private int _width;
+        private double _height;
+        private double _width;
         private double _posY;
         private double _posX;
 
@@ -28,13 +28,13 @@ namespace PostItProject.Models
             set => SetProperty(ref _color, value);
         }
 
-        public int Height
+        public double Height
         {
             get => _height;
             set => SetProperty(ref _height, value);
         }
 
-        public int Width
+        public double Width
         {
             get => _width;
             set => SetProperty(ref _width, value);
@@ -52,7 +52,6 @@ namespace PostItProject.Models
             set => SetProperty(ref _posX, value);
         }
 
-        public PostIt() { }
 
     }
 }
