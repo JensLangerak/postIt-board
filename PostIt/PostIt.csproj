@@ -58,6 +58,7 @@
     </ApplicationDefinition>
     <Compile Include="ViewModels\UserControls\ViewModelPostIt.cs" />
     <Compile Include="Views\Converters\ColorToSolidColorBrushConverter.cs" />
+    <Compile Include="Views\CustomControls\MoveThumb.cs" />
     <Compile Include="Views\UserControls\PostItControl.xaml.cs">
       <DependentUpon>PostItControl.xaml</DependentUpon>
     </Compile>

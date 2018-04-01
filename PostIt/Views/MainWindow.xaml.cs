@@ -26,14 +26,23 @@ namespace PostItProject.Views
         public MainWindow()
         {
             InitializeComponent();
-
+            ViewModelPostIt t = new ViewModelPostIt();
+            PostIt p = new PostIt();
+            p.Color = Colors.Aqua;
+            t.Model = p;
+            p.Height = 100;
+            p.Width = 170;
+            p.PosX = 10;
+            p.PosY = 50;
+            p.Text = "Hello World!";
+            //Test.DataContext = t;
             this.UpdateLayout();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             ((ViewModelMainWindow) DataContext).AddItem();
-
+            this.UpdateLayout();
         }
     }
 }

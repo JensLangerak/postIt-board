@@ -13,8 +13,8 @@ namespace PostItProject.Models
         private Color _color;
         private int _height;
         private int _width;
-        private int _posY;
-        private int _posX;
+        private double _posY;
+        private double _posX;
 
         public string Text
         {
@@ -40,13 +40,13 @@ namespace PostItProject.Models
             set => SetProperty(ref _width, value);
         }
 
-        public int PosY
+        public double PosY
         {
             get => _posY;
             set => SetProperty(ref _posY, value);
         }
 
-        public int PosX
+        public double PosX
         {
             get => _posX;
             set => SetProperty(ref _posX, value);

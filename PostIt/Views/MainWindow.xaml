@@ -6,6 +6,7 @@
         xmlns:p = "clr-namespace:PostItProject.Properties"
         xmlns:local="clr-namespace:PostItProject.Views"
         xmlns:uc="clr-namespace:PostItProject.Views.UserControls"
+        xmlns:cc="clr-namespace:PostItProject.Views.CustomControls"
         xmlns:vmUc="clr-namespace:PostItProject.ViewModels.UserControls"
         xmlns:vm ="clr-namespace:PostItProject.ViewModels"
         mc:Ignorable="d"
@@ -18,20 +19,12 @@
             </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelMainWindow x:Key="ViewModelMainWindow"/>
 
-            <DataTemplate DataType = "{x:Type vmUc:ViewModelPostIt}">
-                <ContentControl Name="DesignerItem"
-                                Width ="{Binding Model.Width, Mode=OneWay}"
-                                Height="{Binding Model.Height, Mode=OneWay}"
-                                Template="{StaticResource MovableControlTemplate}">
-                    <uc:PostItControl x:Name="Test"></uc:PostItControl>
-                </ContentControl>
-            </DataTemplate>
+           
         </ResourceDictionary>
     </Window.Resources>
     <Grid>
 
-<StackPanel Orientation="Vertical">
-
+        <StackPanel Orientation="Vertical">
             <ItemsControl ItemsSource="{Binding SomeEntityCollection}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -47,17 +40,31 @@
                             <x:Type Type= "vmUc:ViewModelPostIt" />
                         </d:Style.DataContext>
                         <Setter Property="Canvas.Left"
-                                Value= "{Binding Model.PosX, Mode=OneWay}"/>
+                                Value= "{Binding Model.PosX, Mode=TwoWay}"/>
                         <Setter Property="Canvas.Top"
-                                Value= "{Binding Model.PosY, Mode=OneWay}"/>
+                                Value= "{Binding Model.PosY, Mode=TwoWay}"/>
 
                     </Style>
                 </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Name="DesignerItem"
+                                        Template="{StaticResource MovableControlTemplate}"
+                                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}}">
+                            <uc:PostItControl x:Name="Test" DataContext="{Binding DataContext}"
+                                              d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"
+                                              Width ="{Binding Model.Width, Mode=TwoWay}"
+                                              Height="{Binding Model.Height, Mode=TwoWay}" />
+                        </ContentControl>
+
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+      
                 
                 
             </ItemsControl>
             <Button Click="ButtonBase_OnClick">Test</Button>
-
-    </StackPanel>
+           
+        </StackPanel>
     </Grid>
 </Window>
