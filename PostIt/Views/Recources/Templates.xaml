@@ -38,7 +38,7 @@
     <ControlTemplate x:Key="MovableControlTemplate" TargetType="ContentControl">
         <Grid>
             <cc:MoveThumb Cursor="SizeAll" />
-            <!--<Control Template="{StaticResource RotatableTemplate}"/>-->
+            <Control Template="{StaticResource RotatableTemplate}"/>
             <Control Template="{StaticResource ResizeTemplate}"/>
             <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
         </Grid>
