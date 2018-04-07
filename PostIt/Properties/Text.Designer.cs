@@ -68,5 +68,23 @@ namespace PostItProject.Properties {
                 return ResourceManager.GetString("MainWindow", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To background.
+        /// </summary>
+        public static string To_background {
+            get {
+                return ResourceManager.GetString("To_background", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To foreground.
+        /// </summary>
+        public static string To_foreground {
+            get {
+                return ResourceManager.GetString("To_foreground", resourceCulture);
+            }
+        }
     }
 }

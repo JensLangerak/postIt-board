@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:cc="clr-namespace:PostItProject.Views.CustomControls"
+                    xmlns:p = "clr-namespace:PostItProject.Properties"
                     xmlns:local="clr-namespace:PostItProject.Views.Recources">
 
 
@@ -35,12 +36,25 @@
         </Grid>
     </ControlTemplate>
 
-    <ControlTemplate x:Key="MovableControlTemplate" TargetType="ContentControl">
+    <Style TargetType="{x:Type cc:ResizeControl}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="cc:ResizeControl">
         <Grid>
+            <Grid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static p:Text.To_foreground}" Name="ItemToForeground" />
+                    <MenuItem Header="{x:Static p:Text.To_background}" Name="ItemToBackground"/>
+                </ContextMenu>
+            </Grid.ContextMenu>
+
             <cc:MoveThumb Cursor="SizeAll" />
             <Control Template="{StaticResource RotatableTemplate}"/>
             <Control Template="{StaticResource ResizeTemplate}"/>
-            <ContentPresenter Content="{TemplateBinding ContentControl.Content}"/>
+            <ContentPresenter />
         </Grid>
     </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 </ResourceDictionary>

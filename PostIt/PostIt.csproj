@@ -59,6 +59,7 @@
     <Compile Include="ViewModels\UserControls\ViewModelPostIt.cs" />
     <Compile Include="Views\Converters\ColorToSolidColorBrushConverter.cs" />
     <Compile Include="Views\CustomControls\MoveThumb.cs" />
+    <Compile Include="Views\CustomControls\ResizeControl.cs" />
     <Compile Include="Views\CustomControls\ResizeThumb.cs" />
     <Compile Include="Views\CustomControls\RotateThumb.cs" />
     <Compile Include="Views\UserControls\PostItControl.xaml.cs">

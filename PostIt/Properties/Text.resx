@@ -120,4 +120,10 @@
   <data name="MainWindow" xml:space="preserve">
     <value>Main window</value>
   </data>
+  <data name="To_background" xml:space="preserve">
+    <value>To background</value>
+  </data>
+  <data name="To_foreground" xml:space="preserve">
+    <value>To foreground</value>
+  </data>
 </root>

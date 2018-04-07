@@ -49,12 +49,16 @@
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <ContentControl Name="PostItControl"
+                      <!--  <ContentControl Name="PostItControl"
                                         Template="{StaticResource MovableControlTemplate}"
                                         DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}">
                             <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
                                               d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
-                        </ContentControl>
+                        </ContentControl> -->
+                        <cc:ResizeControl  DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}">
+                            <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
+                                              d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
+                        </cc:ResizeControl>
 
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
