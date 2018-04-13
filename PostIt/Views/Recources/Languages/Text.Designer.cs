@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PostItProject.Properties {
+namespace PostItProject.Views.Recources.Languages {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace PostItProject.Properties {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostItProject.Properties.Text", typeof(Text).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("PostItProject.Views.Recources.Languages.Text", typeof(Text).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -66,6 +66,15 @@ namespace PostItProject.Properties {
         public static string MainWindow {
             get {
                 return ResourceManager.GetString("MainWindow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset rotation.
+        /// </summary>
+        public static string Reset_rotation {
+            get {
+                return ResourceManager.GetString("Reset_rotation", resourceCulture);
             }
         }
         

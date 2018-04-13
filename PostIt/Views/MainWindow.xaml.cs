@@ -25,18 +25,17 @@ namespace PostItProject.Views
     {
         public MainWindow()
         {
+            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+
             InitializeComponent();
-            ViewModelPostIt t = new ViewModelPostIt();
-            PostIt p = new PostIt();
-            p.Color = Colors.Aqua;
-            t.Model = p;
-            p.Height = 100;
-            p.Width = 170;
-            p.PosX = 10;
-            p.PosY = 50;
-            p.Text = "Hello World!";
-            //Test.DataContext = t;
-            this.UpdateLayout();
+        }
+
+
+
+        private void HandleEsc(object sender, KeyEventArgs e)//TODO move to canvas
+        {
+            if (e.Key == Key.Escape)
+                Keyboard.ClearFocus();
         }
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)

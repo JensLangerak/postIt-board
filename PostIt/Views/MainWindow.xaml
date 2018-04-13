@@ -9,8 +9,9 @@
         xmlns:cc="clr-namespace:PostItProject.Views.CustomControls"
         xmlns:vmUc="clr-namespace:PostItProject.ViewModels.UserControls"
         xmlns:vm ="clr-namespace:PostItProject.ViewModels"
+        xmlns:languages="clr-namespace:PostItProject.Views.Recources.Languages"
         mc:Ignorable="d"
-        Title="{x:Static p:Text.MainWindow}" Height="350" Width="525"
+        Title="{x:Static languages:Text.MainWindow}" Height="350" Width="525"
         DataContext="{DynamicResource ViewModelMainWindow}">
     <Window.Resources>
         <ResourceDictionary>
@@ -20,6 +21,7 @@
             <vm:ViewModelMainWindow x:Key="ViewModelMainWindow"/>
         </ResourceDictionary>
     </Window.Resources>
+
     <Grid>
 
         <StackPanel Orientation="Vertical">
@@ -55,7 +57,7 @@
                             <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
                                               d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
                         </ContentControl> -->
-                        <cc:ResizeControl  DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}">
+                        <cc:ResizeControl  DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}" ShowControls="{Binding IsKeyboardFocusWithin, Mode=OneWay}">
                             <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
                                               d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
                         </cc:ResizeControl>

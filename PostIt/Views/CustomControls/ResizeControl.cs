@@ -10,8 +10,7 @@ using System.Windows.Media;
 
 namespace PostItProject.Views.CustomControls
 {
-    [ContentProperty("Content")]
-    public class ResizeControl : Control
+    public class ResizeControl : ContentControl
     {
         public ResizeControl()
         {
@@ -67,6 +66,38 @@ namespace PostItProject.Views.CustomControls
             }
         }
 
+        private MenuItem _resetRotation;
+
+        private MenuItem ResetRotation
+        {
+            get => _resetRotation;
+
+            set
+            {
+                if (_resetRotation != null)
+                {
+                    _resetRotation.Click -=
+                        new RoutedEventHandler(ResetRotation_Click);
+                }
+
+                _resetRotation = value;
+
+                if (_resetRotation != null)
+                {
+                    _resetRotation.Click +=
+                        new RoutedEventHandler(ResetRotation_Click);
+                }
+            }
+        }
+
+        private void ResetRotation_Click(object sender, RoutedEventArgs e)
+        {
+            if (!(this.DataContext is FrameworkElement item)) return;
+            if (!(item.RenderTransform is RotateTransform rotate)) return;
+            rotate.Angle = 0;
+        }
+
+
         private void ToBackground_Click(object sender, RoutedEventArgs e)
         {
             ChangeZIndexHelper(Math.Min, -1);
@@ -118,15 +149,44 @@ namespace PostItProject.Views.CustomControls
         {
             ToForeground = GetTemplateChild("ItemToForeground") as MenuItem;
             ToBackground = GetTemplateChild("ItemToBackground") as MenuItem;
+            ResetRotation = GetTemplateChild("itemResetRotation") as MenuItem;            
         }
 
-        public object Content
+        public bool Move
         {
-            get => GetValue(ContentProperty);
-            set => SetValue(ContentProperty, value);
+            get => (bool)GetValue(MoveProperty);
+            set => SetValue(MoveProperty, value);
         }
 
-        public static readonly DependencyProperty ContentProperty =
-            DependencyProperty.Register("Content", typeof(object), typeof(ResizeControl), null);
+        public bool Resize
+        {
+            get => (bool)GetValue(ResizeProperty);
+            set => SetValue(ResizeProperty, value);
+        }
+
+        public bool Rotate
+        {
+            get => (bool)GetValue(RotateProperty);
+            set => SetValue(RotateProperty, value);
+        }
+
+        public bool ShowControls
+        {
+            get => (bool)GetValue(ShowControlsProperty);
+            set => SetValue(ShowControlsProperty, value);
+        }
+
+        public static readonly DependencyProperty MoveProperty =
+            DependencyProperty.Register("Move", typeof(bool), typeof(ResizeControl), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty ResizeProperty =
+            DependencyProperty.Register("Resize", typeof(bool), typeof(ResizeControl), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty RotateProperty =
+            DependencyProperty.Register("Rotate", typeof(bool), typeof(ResizeControl), new PropertyMetadata(true));
+
+        public static readonly DependencyProperty ShowControlsProperty =
+            DependencyProperty.Register("ShowControls", typeof(bool), typeof(ResizeControl), new PropertyMetadata(true));
+
     }
 }

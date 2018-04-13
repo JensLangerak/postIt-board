@@ -120,6 +120,9 @@
   <data name="MainWindow" xml:space="preserve">
     <value>Main window</value>
   </data>
+  <data name="Reset_rotation" xml:space="preserve">
+    <value>Reset rotation</value>
+  </data>
   <data name="To_background" xml:space="preserve">
     <value>To background</value>
   </data>
