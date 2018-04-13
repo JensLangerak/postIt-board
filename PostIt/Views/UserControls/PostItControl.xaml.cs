@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using PostItProject.ViewModels.UserControls;
+using Xceed.Wpf.Toolkit;
 
 namespace PostItProject.Views.UserControls
 {
@@ -23,6 +25,12 @@ namespace PostItProject.Views.UserControls
         public PostItControl()
         {
             InitializeComponent();
+        }
+
+        private void test_Click(object sender, RoutedPropertyChangedEventArgs<Color?> e)
+        {
+            ; // throw new NotImplementedException();
+    //        ((ViewModelPostIt)this.DataContext).Model.Color = ((ColorPicker)sender).SelectedColor;
         }
     }
 }

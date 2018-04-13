@@ -8,6 +8,7 @@
              xmlns:vm="clr-namespace:PostItProject.ViewModels.UserControls"
              xmlns:v="clr-namespace:PostItProject.Views"
              xmlns:converters="clr-namespace:PostItProject.Views.Converters"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200"
              d:DataContext="{d:DesignInstance Type=vm:ViewModelPostIt, IsDesignTimeCreatable=False}"
@@ -66,10 +67,28 @@
 
     </UserControl.Resources>
     
-    <Border BorderBrush="#999999" BorderThickness="4" Margin="18" Background="{Binding Model.Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}">
+    <Border BorderBrush="#999999" BorderThickness="4" Margin="8" Background="{Binding Model.Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap"  AcceptsReturn="True" AcceptsTab="True" Text="{Binding Model.Text, Mode=TwoWay}"></TextBox>
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap"  AcceptsReturn="True" AcceptsTab="True" Text="{Binding Model.Text, Mode=TwoWay}">
+                    <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem>
+                                <MenuItem.HeaderTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                        <Label Padding="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center">Color </Label>
+                                            <xctk:ColorPicker HorizontalAlignment="Right" Width="70" DisplayColorAndName="False" SelectedColor="{Binding DataContext.Model.Color,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Mode=TwoWay}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </MenuItem.HeaderTemplate>
+                            </MenuItem>
+                            <MenuItem Command="ApplicationCommands.Copy" />
+                            <MenuItem Command="ApplicationCommands.Cut" />
+                            <MenuItem Command="ApplicationCommands.Paste" />
+                        </ContextMenu>
+                    </TextBox.ContextMenu>
+                </TextBox>
         </ScrollViewer>
     </Border>
 </UserControl>

@@ -51,13 +51,7 @@
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                      <!--  <ContentControl Name="PostItControl"
-                                        Template="{StaticResource MovableControlTemplate}"
-                                        DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}">
-                            <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
-                                              d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
-                        </ContentControl> -->
-                        <cc:ResizeControl  DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}" ShowControls="{Binding IsKeyboardFocusWithin, Mode=OneWay}">
+                        <cc:ResizeControl DataContext="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ContentPresenter}, Mode=OneWay}" ShowControls="{Binding IsKeyboardFocusWithin, Mode=OneWay}">
                             <uc:PostItControl x:Name="Test" DataContext="{TemplateBinding DataContext}"
                                               d:DataContext="{d:DesignInstance Type=vmUc:ViewModelPostIt}"/>
                         </cc:ResizeControl>

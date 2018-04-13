@@ -52,7 +52,7 @@
                                 </ContextMenu>
                             </Grid.ContextMenu>
 
-                            <customControls:MoveThumb Cursor="SizeAll"  Visibility="{Binding Move, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
+                            <customControls:MoveThumb Cursor="SizeAll"  Visibility="{Binding Move, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Opacity="0"/>
                             <Control Template="{StaticResource RotatableTemplate}" Visibility="{Binding Rotate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
                             <Control Template="{StaticResource ResizeTemplate}"  Visibility="{Binding Resize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
                         </Grid>

@@ -10,7 +10,7 @@ namespace PostItProject.Models
     public class PostIt : ModelBase
     {
         private string _text;
-        private Color _color;
+        private Color? _color;
         private double _height;
         private double _width;
         private double _posY;
@@ -22,7 +22,7 @@ namespace PostItProject.Models
             set => SetProperty(ref _text, value);
         }
 
-        public Color Color
+        public Color? Color
         {
             get => _color;
             set => SetProperty(ref _color, value);
