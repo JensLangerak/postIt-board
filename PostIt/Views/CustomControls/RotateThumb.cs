@@ -9,14 +9,22 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using Xceed.Wpf.DataGrid;
 
 namespace PostItProject.Views.CustomControls
 {
-    class RotateThumb : Thumb
+    public class RotateThumb : Thumb
     {
         public RotateThumb()
         {
             this.DragDelta += new DragDeltaEventHandler(this.RotateDragDelta);
+            this.DataContextChanged += SetTransformOrigin;
+        }
+
+        private void SetTransformOrigin(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            if (!(this.DataContext is FrameworkElement item)) return;
+            item.RenderTransformOrigin = new Point(0.5, 0.5);
         }
 
         private void RotateDragDelta(object sender, DragDeltaEventArgs e)
@@ -29,7 +37,6 @@ namespace PostItProject.Views.CustomControls
                 item.RenderTransformOrigin = new Point(0.5, 0.5);
             }
 
-           
             var center = new Point(item.ActualWidth / 2.0, item.ActualHeight / 2.0);
             var relativeMousePos = Mouse.GetPosition(item) - center;
 

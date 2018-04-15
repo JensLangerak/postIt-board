@@ -18,6 +18,7 @@ namespace PostItProject.Views.CustomControls
         }
 
 
+
         private MenuItem _toForeground;
 
         private MenuItem ToForeground

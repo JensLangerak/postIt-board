@@ -79,20 +79,20 @@ namespace PostItProject.Views.Recources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Main window.
-        /// </summary>
-        public static string MainWindow {
-            get {
-                return ResourceManager.GetString("MainWindow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reset rotation.
         /// </summary>
         public static string Reset_rotation {
             get {
                 return ResourceManager.GetString("Reset_rotation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Post It.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         

@@ -13,11 +13,18 @@ namespace PostItProject.Models
     {
 
         private ObservableCollection<PostIt> _postIts = new ObservableCollection<PostIt>();
+        private string _filePath;
 
         public ObservableCollection<PostIt> PostIts
         {
             get => _postIts;
             set => SetProperty(ref _postIts, value);
+        }
+
+        public string FilePath
+        {
+            get => _filePath;
+            set => SetProperty(ref _filePath, value);
         }
     }
 }

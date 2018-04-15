@@ -15,6 +15,20 @@ namespace PostItProject.Models
         private double _width;
         private double _posY;
         private double _posX;
+        private int _zIndex;
+        private double _rotation;
+
+        public int ZIndex
+        {
+            get => _zIndex;
+            set => SetProperty(ref _zIndex, value);
+        }
+
+        public double Rotation
+        {
+            get => _rotation;
+            set => SetProperty(ref _rotation, value);
+        }
 
         public string Text
         {

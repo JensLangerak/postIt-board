@@ -71,7 +71,7 @@
     <Border BorderBrush="#999999" BorderThickness="4" Margin="8" Background="{Binding Model.Color, Converter={StaticResource ColorToSolidColorBrushValueConverter}}">
         <ScrollViewer VerticalScrollBarVisibility="Auto" 
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" >
-            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap"  AcceptsReturn="True" AcceptsTab="True" Text="{Binding Model.Text, Mode=TwoWay}">
+            <TextBox HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent" BorderThickness="0" TextWrapping="Wrap"  AcceptsReturn="True" AcceptsTab="True" Text="{Binding Model.Text, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                     <TextBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem>

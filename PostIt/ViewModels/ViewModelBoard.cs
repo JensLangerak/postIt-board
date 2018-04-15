@@ -22,6 +22,11 @@ namespace PostItProject.ViewModels
             _model = pModel;
             CreateNewPostItCommand = new RelayCommand(CreateNewPostIt);
             _model.PostIts.CollectionChanged += PostIts_CollectionChanged;
+
+            foreach (var postIt in _model.PostIts)
+            {
+                AddPostIt(postIt);
+            }
         }
 
         private void PostIts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)

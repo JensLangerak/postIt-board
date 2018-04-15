@@ -41,7 +41,6 @@
                     <ControlTemplate.Resources>
                         <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
                     </ControlTemplate.Resources>
-
                     <Grid>
                         <Grid Visibility="{Binding ShowControls, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}">
                             <Grid.ContextMenu>
@@ -52,7 +51,7 @@
                                 </ContextMenu>
                             </Grid.ContextMenu>
 
-                            <customControls:MoveThumb Cursor="SizeAll"  Visibility="{Binding Move, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Opacity="0"/>
+                            <customControls:MoveThumb Cursor="SizeAll"  Visibility="{Binding Move, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}" Opacity="0"/>
                             <Control Template="{StaticResource RotatableTemplate}" Visibility="{Binding Rotate, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
                             <Control Template="{StaticResource ResizeTemplate}"  Visibility="{Binding Resize, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource BoolToVisibilityConverter}, Mode=OneWay}"/>
                         </Grid>

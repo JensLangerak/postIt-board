@@ -11,7 +11,7 @@
         xmlns:vm ="clr-namespace:PostItProject.ViewModels"
         xmlns:languages="clr-namespace:PostItProject.Views.Recources.Languages"
         mc:Ignorable="d"
-        Title="{x:Static languages:Text.MainWindow}" Height="350" Width="525"
+        Height="550" Width="525"
         DataContext="{DynamicResource ViewModelMainWindow}">
     <Window.Resources>
         <ResourceDictionary>
@@ -21,19 +21,45 @@
             <vm:ViewModelMainWindow x:Key="ViewModelMainWindow"/>
         </ResourceDictionary>
     </Window.Resources>
+    <Window.Title>
+        <MultiBinding StringFormat="{}{0}  {1}">
+            <Binding Source="{x:Static languages:Text.Title}" />
+            <Binding Path="Board.Model.FilePath" />
+        </MultiBinding>
+    </Window.Title>
 
-    <Grid>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="_File">
+                    <MenuItem Header="_New" Command="{Binding NewCommand}"/>
+                <MenuItem Header="_Open" Command="{Binding LoadCommand}" />
+                <MenuItem Header="_Save"  Command="{Binding SaveCommand}"  />
+                    <MenuItem Header="Save _As"  Command="{Binding SaveAsCommand}"  />
+                <Separator />
+                <MenuItem Header="_Exit" Command="{Binding ExitCommand}" />
+                </MenuItem>
 
-        <StackPanel Orientation="Vertical">
+            <MenuItem Header="_Board">
+                <MenuItem Header="_New Post It" Command="{Binding Board.CreateNewPostItCommand}"/>
+            </MenuItem>
+        </Menu>
+
+        <Border BorderThickness="10" BorderBrush="GreenYellow">
             <ItemsControl DataContext="{Binding Board}" ItemsSource="{Binding PostItsViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True"
-                                Width="250"
-                                Height="300"/>
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                ClipToBounds="True">
+                            <Canvas.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="_New Post It" Command="{Binding CreateNewPostItCommand}"/>
+                                    </ContextMenu>
+                            </Canvas.ContextMenu>
+                            </Canvas>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
-
                 <ItemsControl.ItemContainerStyle>
                     <Style TargetType="{x:Type ContentPresenter}">
                         <d:Style.DataContext>
@@ -47,6 +73,13 @@
                                 Value= "{Binding Model.Height, Mode=TwoWay}"/>
                         <Setter Property="Width"
                                 Value= "{Binding Model.Width, Mode=TwoWay}"/>
+                        <Setter Property="Canvas.ZIndex"
+                                Value= "{Binding Model.ZIndex, Mode=TwoWay}"/>
+                        <Setter Property="RenderTransform">
+                            <Setter.Value>
+                                <RotateTransform Angle="{Binding Model.Rotation, Mode=TwoWay}"></RotateTransform>
+                            </Setter.Value>
+                        </Setter>
                     </Style>
                 </ItemsControl.ItemContainerStyle>
                 <ItemsControl.ItemTemplate>
@@ -58,12 +91,7 @@
 
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
-      
-                
-                
             </ItemsControl>
-            <Button Command="{Binding Board.CreateNewPostItCommand}">Test</Button>
-           
-        </StackPanel>
-    </Grid>
+        </Border>
+    </DockPanel>
 </Window>
