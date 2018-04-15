@@ -15,48 +15,17 @@ namespace PostItProject.ViewModels
 {
     public class ViewModelMainWindow : ViewModelBase
     {
-        private ObservableCollection<ViewModelPostIt> _SomeEntityCollection = new ObservableCollection<ViewModelPostIt>();
+        private ViewModelBoard _board;
 
-        public ObservableCollection<ViewModelPostIt> SomeEntityCollection
+        public ViewModelBoard Board
         {
-            get => _SomeEntityCollection;
-            set => SetProperty(ref _SomeEntityCollection, value);
+            get => _board;
+            set => SetProperty(ref _board, value);
         }
-        private string _testString = "Hello world!";
-
-        public string TestString
-        {
-            get => _testString;
-            set => SetProperty(ref _testString, value);
-        }
-
-        public RelayCommand UpdateTekstCommand { get; set; }
 
         public ViewModelMainWindow()
         {
-            UpdateTekstCommand = new RelayCommand(TestCommand);
-
-        }
-
-        void TestCommand(object waarde)
-        {
-            TestString = (string) waarde;
-            if (TestString == "test")
-                MessageBox.Show("Test");
-        }
-
-        public void AddItem()
-        {
-            ViewModelPostIt t = new ViewModelPostIt();
-            PostIt p = new PostIt();
-            p.Color = Colors.Aqua;
-            t.Model = p;
-            p.Height = 100;
-            p.Width = 170;
-            p.PosX = 10;
-            p.PosY = 50;
-            p.Text = "Hello World!";
-            SomeEntityCollection.Add(t);
+            _board = new ViewModelBoard(new Board());
         }
     }
 }

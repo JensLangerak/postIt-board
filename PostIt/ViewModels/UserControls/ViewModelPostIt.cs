@@ -13,6 +13,15 @@ namespace PostItProject.ViewModels.UserControls
     {
         private PostIt _model;
 
+        public delegate void RemoveEventHandler(PostIt pPostIt);
+        public event RemoveEventHandler RemovePostIt;
+
+        public ViewModelPostIt(PostIt pModel)
+        {
+            _model = pModel;
+            DeleteCommand = new RelayCommand(DeletePostIt);
+        }
+
         public PostIt Model
         {
             get => _model;
@@ -20,24 +29,18 @@ namespace PostItProject.ViewModels.UserControls
         }
 
         private Color _color;
+
         public Color Color
         {
             get => _color;
             set => SetProperty(ref _color, value);
         }
 
+        public RelayCommand DeleteCommand { get; set; }
 
-        public RelayCommand UpdateColorCommand { get; set; }
-
-        public ViewModelPostIt()
+        private void DeletePostIt(object pParameter)
         {
-            UpdateColorCommand = new RelayCommand(UpdateColor);
-        }
-
-
-        protected void UpdateColor(object p)
-        {
-            Model.Color = Colors.Red;
+            RemovePostIt?.Invoke(_model);
         }
     }
 }

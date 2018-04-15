@@ -9,6 +9,7 @@
              xmlns:v="clr-namespace:PostItProject.Views"
              xmlns:converters="clr-namespace:PostItProject.Views.Converters"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:languages="clr-namespace:PostItProject.Views.Recources.Languages"
              mc:Ignorable="d" 
              d:DesignHeight="200" d:DesignWidth="200"
              d:DataContext="{d:DesignInstance Type=vm:ViewModelPostIt, IsDesignTimeCreatable=False}"
@@ -74,19 +75,21 @@
                     <TextBox.ContextMenu>
                     <ContextMenu>
                         <MenuItem>
-                                <MenuItem.HeaderTemplate>
-                                    <DataTemplate>
-                                        <StackPanel Orientation="Horizontal">
-                                        <Label Padding="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center">Color </Label>
-                                            <xctk:ColorPicker HorizontalAlignment="Right" Width="70" DisplayColorAndName="False" SelectedColor="{Binding DataContext.Model.Color,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </MenuItem.HeaderTemplate>
-                            </MenuItem>
-                            <MenuItem Command="ApplicationCommands.Copy" />
-                            <MenuItem Command="ApplicationCommands.Cut" />
-                            <MenuItem Command="ApplicationCommands.Paste" />
-                        </ContextMenu>
+                            <MenuItem.HeaderTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                    <Label Padding="0,0,10,0" HorizontalAlignment="Left" VerticalAlignment="Center" Content="{x:Static languages:Text.Color}"/>
+                                        <xctk:ColorPicker HorizontalAlignment="Right" Width="70" DisplayColorAndName="False" SelectedColor="{Binding DataContext.Model.Color,  RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContextMenu}}, Mode=TwoWay}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </MenuItem.HeaderTemplate>
+                        </MenuItem>
+                        <MenuItem Command="{Binding DeleteCommand}" Header="{x:Static languages:Text.Delete}" />
+                        <Separator />
+                        <MenuItem Command="ApplicationCommands.Copy" />
+                        <MenuItem Command="ApplicationCommands.Cut" />
+                        <MenuItem Command="ApplicationCommands.Paste" />
+                    </ContextMenu>
                     </TextBox.ContextMenu>
                 </TextBox>
         </ScrollViewer>

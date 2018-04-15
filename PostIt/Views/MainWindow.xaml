@@ -25,7 +25,7 @@
     <Grid>
 
         <StackPanel Orientation="Vertical">
-            <ItemsControl ItemsSource="{Binding SomeEntityCollection}">
+            <ItemsControl DataContext="{Binding Board}" ItemsSource="{Binding PostItsViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <Canvas IsItemsHost="True"
@@ -62,7 +62,7 @@
                 
                 
             </ItemsControl>
-            <Button Click="ButtonBase_OnClick">Test</Button>
+            <Button Command="{Binding Board.CreateNewPostItCommand}">Test</Button>
            
         </StackPanel>
     </Grid>
