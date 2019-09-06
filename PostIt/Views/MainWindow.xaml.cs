@@ -26,7 +26,6 @@ namespace PostItProject.Views
         public MainWindow()
         {
             this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
-
             InitializeComponent();
         }
 
@@ -36,6 +35,30 @@ namespace PostItProject.Views
         {
             if (e.Key == Key.Escape)
                 Keyboard.ClearFocus();
+        }
+
+        private Point _startScrollMouseCanvasCoord;
+        private void Sv_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _startScrollMouseCanvasCoord = e.GetPosition(sv);
+            _startScrollMouseCanvasCoord.X += sv.HorizontalOffset;
+            _startScrollMouseCanvasCoord.Y += sv.VerticalOffset;
+
+            sv.CaptureMouse();
+        }
+
+        private void Sv_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            if (sv.IsMouseCaptured)
+            {
+                sv.ScrollToHorizontalOffset(_startScrollMouseCanvasCoord.X - e.GetPosition(sv).X);
+                sv.ScrollToVerticalOffset(_startScrollMouseCanvasCoord.Y - e.GetPosition(sv).Y);
+            }
+        }
+
+        private void Sv_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            sv.ReleaseMouseCapture();
         }
     }
 }

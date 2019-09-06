@@ -2,9 +2,13 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using PostItProject.Models;
 using PostItProject.ViewModels.Commands;
@@ -16,17 +20,16 @@ namespace PostItProject.ViewModels
     {
         private ObservableCollection<ViewModelPostIt> _postItsViewModels = new ObservableCollection<ViewModelPostIt>();
         private Board _model;
+        private double _height;
+        private double _width;
+        private bool _possibleResizeInProgress = false;
 
         public ViewModelBoard(Board pModel)
         {
-            _model = pModel;
+            Model = pModel;
             CreateNewPostItCommand = new RelayCommand(CreateNewPostIt);
-            _model.PostIts.CollectionChanged += PostIts_CollectionChanged;
-
-            foreach (var postIt in _model.PostIts)
-            {
-                AddPostIt(postIt);
-            }
+            StartPossibleResizeCommand = new RelayCommand(StartPossibleResize);
+            EndPossibleResizeCommand = new RelayCommand(EndPossibleResize);
         }
 
         private void PostIts_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -51,11 +54,40 @@ namespace PostItProject.ViewModels
 
         private void PostItReset(object sender, NotifyCollectionChangedEventArgs e)
         {
+            foreach (var vm in _postItsViewModels)
+            {
+                vm.RemovePostIt -= RemovePostIt;
+                vm.PropertyChanged -= PostItChanged;
+            }
             _postItsViewModels.Clear();
             foreach (var p in Model.PostIts)
             {
                 AddPostIt(p);
             }
+        }
+
+        private void PostItChanged(object sender, PropertyChangedEventArgs e)
+        {
+            switch (e.PropertyName)
+            {
+                case nameof(ViewModelPostIt.MostRightCoord):
+                case nameof(ViewModelPostIt.MostDownCoord):
+                    UpdateBoardSize();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void UpdateBoardSize()
+        {
+            var newHeight =  PostItsViewModels.Select(x => x.MostDownCoord).DefaultIfEmpty(0).Max() + 100;
+            var newWidth = PostItsViewModels.Select(x => x.MostRightCoord).DefaultIfEmpty(0).Max() + 100;
+
+            if (!_possibleResizeInProgress || Height < newHeight)
+                Height = newHeight;
+            if (!_possibleResizeInProgress || Width < newWidth)
+                Width = newWidth;
         }
 
         private void PostItAdded(object sender, NotifyCollectionChangedEventArgs e)
@@ -70,6 +102,7 @@ namespace PostItProject.ViewModels
         {
             var vm = new ViewModelPostIt(pPostIt);
             vm.RemovePostIt += RemovePostIt;
+            vm.PropertyChanged += PostItChanged;
             _postItsViewModels.Add(vm);
         }
 
@@ -82,14 +115,51 @@ namespace PostItProject.ViewModels
         {
             foreach (PostIt p in e.OldItems)
             {
-                _postItsViewModels.Remove(_postItsViewModels.Single(x => x.Model == p));
+                var vm = _postItsViewModels.Single(x => x.Model == p);
+                vm.RemovePostIt -= RemovePostIt;
+                vm.PropertyChanged -= PostItChanged;
+                _postItsViewModels.Remove(vm);
             }
         }
 
         public Board Model
         {
             get => _model;
-            set => SetProperty(ref _model, value);
+            set
+            {
+                if (_model == value) return;
+
+                if (this.Model != null)
+                {
+                    _model.PostIts.CollectionChanged -= PostIts_CollectionChanged;
+                    foreach (var vm in _postItsViewModels)
+                    {
+                        vm.RemovePostIt -= RemovePostIt;
+                        vm.PropertyChanged -= PostItChanged;
+                    }
+                    _postItsViewModels.Clear();
+                }
+
+                SetProperty(ref _model, value);
+
+                _model.PostIts.CollectionChanged += PostIts_CollectionChanged;
+                foreach (var postIt in _model.PostIts)
+                {
+                    AddPostIt(postIt);
+                }
+            }
+        }
+
+        public double Height
+        {
+            get => _height;
+            set => SetProperty(ref _height, value);
+        }
+
+        public double Width
+        {
+            get => _width;
+            set => SetProperty(ref _width, value);
         }
 
         public ObservableCollection<ViewModelPostIt> PostItsViewModels
@@ -102,7 +172,29 @@ namespace PostItProject.ViewModels
 
         private void CreateNewPostIt(object pParameter)
         {
-            _model.PostIts.Add(new PostIt());
+            var postIt = new PostIt();
+            if (pParameter is IInputElement)
+            {
+                Point mousePos = Mouse.GetPosition((IInputElement)pParameter);
+                postIt.PosX = mousePos.X;
+                postIt.PosY = mousePos.Y;
+            }
+
+            _model.PostIts.Add(postIt);
+        }
+
+        public RelayCommand StartPossibleResizeCommand { get; set; }
+        public RelayCommand EndPossibleResizeCommand { get; set; }
+
+        private void StartPossibleResize(object pParameter)
+        {
+            _possibleResizeInProgress = true;
+        }
+
+        private void EndPossibleResize(object pParameter)
+        {
+            _possibleResizeInProgress = false;
+            UpdateBoardSize();
         }
 
     }

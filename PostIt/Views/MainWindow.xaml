@@ -10,6 +10,7 @@
         xmlns:vmUc="clr-namespace:PostItProject.ViewModels.UserControls"
         xmlns:vm ="clr-namespace:PostItProject.ViewModels"
         xmlns:languages="clr-namespace:PostItProject.Views.Recources.Languages"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
         mc:Ignorable="d"
         Height="550" Width="525"
         DataContext="{DynamicResource ViewModelMainWindow}">
@@ -45,16 +46,32 @@
         </Menu>
 
         <Border BorderThickness="10" BorderBrush="GreenYellow">
+            <ScrollViewer Focusable="False" Name="sv" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+                          VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" 
+                          MouseLeftButtonDown="Sv_OnMouseLeftButtonDown" MouseMove="Sv_OnMouseMove"
+                          MouseLeftButtonUp="Sv_OnMouseLeftButtonUp"
+>
             <ItemsControl DataContext="{Binding Board}" ItemsSource="{Binding PostItsViewModels}">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <Canvas IsItemsHost="True"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                ClipToBounds="True">
-                            <Canvas.ContextMenu>
-                                <ContextMenu>
-                                    <MenuItem Header="_New Post It" Command="{Binding CreateNewPostItCommand}"/>
+                            <Canvas IsItemsHost="True"
+                                Background="AliceBlue"
+                                VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                ClipToBounds="True"
+                                MinHeight="{Binding Height, Mode=OneWay}"
+                                MinWidth="{Binding Width, Mode=OneWay}"
+                                x:Name="CanvasBoard">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="PreviewMouseDown">
+                                        <i:InvokeCommandAction Command="{Binding StartPossibleResizeCommand}"/>
+                                </i:EventTrigger>
+                                    <i:EventTrigger EventName="PreviewMouseUp">
+                                        <i:InvokeCommandAction Command="{Binding EndPossibleResizeCommand}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                                <Canvas.ContextMenu>
+                                    <ContextMenu>
+                                        <MenuItem Header="_New Post It" Command="{Binding CreateNewPostItCommand}"/>
                                     </ContextMenu>
                             </Canvas.ContextMenu>
                             </Canvas>
@@ -92,6 +109,7 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
+                </ScrollViewer>
         </Border>
     </DockPanel>
 </Window>
